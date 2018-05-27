@@ -40,6 +40,8 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'devise'
 gem 'bootstrap'
 gem 'sprockets-rails'
+gem 'devise-bootstrapped', github: 'RaceFPV/devise-bootstrapped'
+gem 'redis'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
