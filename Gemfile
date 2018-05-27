@@ -39,7 +39,6 @@ gem 'bootsnap', '>= 1.1.0', require: false
 # Non stock gems
 gem 'devise'
 gem 'bootstrap'
-gem 'jquery-rails'
 gem 'sprockets-rails'
 
 group :development, :test do
