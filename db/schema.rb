@@ -10,16 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_27_020301) do
+ActiveRecord::Schema.define(version: 2018_05_29_020005) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "chatroom_admins", force: :cascade do |t|
+    t.bigint "chatroom_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chatroom_id"], name: "index_chatroom_admins_on_chatroom_id"
+    t.index ["user_id"], name: "index_chatroom_admins_on_user_id"
+  end
 
   create_table "chatroom_users", force: :cascade do |t|
     t.bigint "chatroom_id"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "admin"
     t.index ["chatroom_id"], name: "index_chatroom_users_on_chatroom_id"
     t.index ["user_id"], name: "index_chatroom_users_on_user_id"
   end
@@ -58,6 +68,8 @@ ActiveRecord::Schema.define(version: 2018_05_27_020301) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "chatroom_admins", "chatrooms"
+  add_foreign_key "chatroom_admins", "users"
   add_foreign_key "chatroom_users", "chatrooms"
   add_foreign_key "chatroom_users", "users"
   add_foreign_key "messages", "chatrooms"
