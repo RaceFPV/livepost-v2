@@ -12,9 +12,8 @@
 
   <body>
     <%= render partial: 'layouts/header' %>
+    <main role="main" class="fluid-container" style="margin-top: 70px;">
     <p class="notice alert-info"><%= notice %></p>
-    <p class="alert alert-danger"><%= alert %></p>
-    <main role="main" class="fluid-container" style="margin-top: 50px;">
       <%= yield %>
     </main>
     <%= render partial: 'layouts/footer' %>
