@@ -1,6 +1,25 @@
-<h1>Editing Chatroom</h1>
-
-<%= render 'form', chatroom: @chatroom %>
-
-<%= link_to 'Show', @chatroom %> |
-<%= link_to 'Back', chatrooms_path %>
+    <div class="card bg-light w-25 text-center ml-auto mr-auto">
+      <div class="card-body">
+        <h1 class="text-center">Edit Chatroom</h1>
+        <br/>
+        
+        <%= form_with model: @chatroom do |f| %>
+        
+            <div class="form-group">
+                <%= f.label :name %>
+                <%= f.text_field :name, autofocus: true, class: 'form-control', require: true %>
+            </div>
+        
+            <div class="form-group">
+                <%= f.label :description %>
+                <%= f.text_field :description, autofocus: true, class: 'form-control', placeholder: "Chat room description" %>
+            </div>
+            
+            <br/>
+            <div class="form-group">
+                <%= f.submit "Update", class: "btn btn-primary btn-block btn-lg" %>
+            </div>
+            
+        <% end %>
+        </div>
+    </div>

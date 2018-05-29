@@ -7,4 +7,8 @@ class Chatroom < ApplicationRecord
   def admin?(user)
     self.chatroom_users.where(admin: "owner").pluck("user_id").include?(user.id)
   end
+  
+  def member?(user)
+    self.chatroom_users.pluck("user_id").include?(user.id)
+  end
 end

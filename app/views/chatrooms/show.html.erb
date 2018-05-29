@@ -1,26 +1,41 @@
 <div class="row">
   <div class="col-sm-2" style="position: fixed; left: 0;">
     <h5>Chatrooms</h5>
-    <ul>
+    <div class="list-group">
       <% current_user.chatrooms.each do |chatroom| %>
-        <li><%= link_to chatroom.name, chatroom, data: {behavior: "chatroom-link", chatroom_id: chatroom.id} %></li>
+        <% if chatroom.id.to_s == params[:id].to_s %>
+          <%= link_to chatroom.name, chatroom, data: {behavior: "chatroom-link", chatroom_id: chatroom.id}, class: "list-group-item list-group-item-action active" %>
+        <% else %>
+          <%= link_to chatroom.name, chatroom, data: {behavior: "chatroom-link", chatroom_id: chatroom.id}, class: "list-group-item list-group-item-action" %>
+        <% end %>
       <% end %>
-    </ul>
+    </div>
   </div>
   <div class="col-sm-10 offset-sm-2">
-    <p>
-      <strong>Name:</strong>
-      <%= @chatroom.name %>
-    </p>
+    <div style="margin-right: 1vw;">
+    <nav class="navbar navbar-light bg-light">
+      <span class="navbar-brand mb-0 h1"><%= @chatroom.name %></span>
+      <span class="navbar-text"><%= if !@chatroom.description then "No description" else @chatroom.description[0..60] end %></span>
+    </nav>
+    <br/>
+    <div>
+      <% if @chatroom.admin?(current_user) %>
+            <%= link_to 'Edit', edit_chatroom_path(@chatroom), class: "btn btn-warning btn-sm", style: "float: left;" %>
+            <%= link_to 'Delete', @chatroom, method: :delete, data: { confirm: 'Are you sure? This will delete the entire chatroom.'} , class: "btn btn-warning btn-sm", style: "float: right;" %>
+            <br/>
+            <br/>
+      <% end %>
+    </div>
     
     <div data-behavior='messages' data-chatroom-id='<%= @chatroom.id %>'>
       <% @messages.each do |message| %>
         <%= render message %>
       <% end %>
     </div>
-    
     <%= form_with model: [@chatroom, Message.new], :html => { :id => 'chatroom_form' } do |f| %>
+      <br/>
       <%= f.text_area :body, rows: "1", class: 'form-control', autofocus: true %>
     <% end %>
+  </div>
   </div>
 </div>

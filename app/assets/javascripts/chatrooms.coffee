@@ -1,4 +1,6 @@
 $(document).on "turbolinks:load", ->
+    $('html,body').animate { scrollTop: document.body.scrollHeight }, 'fast'
+    
     $("#chatroom_form").on "keypress", (e) ->
         if e && e.keyCode == 13
             e.preventDefault()

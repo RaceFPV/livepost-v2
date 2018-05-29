@@ -1,5 +1,20 @@
-<h1>New Chatroom</h1>
+    <div class="card bg-light w-25 text-center ml-auto mr-auto">
+      <div class="card-body">
+        <h1 class="text-center">New Chatroom</h1>
+        <br/>
 
-<%= render 'form', chatroom: @chatroom %>
-
-<%= link_to 'Back', chatrooms_path %>
+        <%= form_with model: @chatroom do |f| %>
+        
+            <div class="form-group">
+                <%= f.label :name %>
+                <%= f.text_field :name, autofocus: true, class: 'form-control', placeholder: "Chat room name" %>
+            </div>
+            
+            <br/>
+            <div class="form-group">
+                <%= f.submit "Create", class: "btn btn-primary btn-block btn-lg" %>
+            </div>
+        
+        <% end %>
+        </div>
+    </div>
